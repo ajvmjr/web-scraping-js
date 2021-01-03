@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Web Scraping</title>
+</head>
+<body>
+  <style>
+    .container{
+      display: flex;
+      gap: .4rem;
+    }
+
+    li{
+      list-style-type: none;
+    }
+
+    li img {
+      height: 100%;
+      object-fit: cover;
+      width: 100%;
+    }
+  </style>
+  <div class="container"></div>
+  <script>
+    (async () => {
+      const res = await fetch('./instagram.json')
+      const data = await res.json()
+  
+      const htmlList = data.map( ({src}) => `<li><img src="${src}"></li>`).join('')
+      document.querySelector('.container').innerHTML = htmlList
+    })();
+  </script>
+</body>
+</html>
